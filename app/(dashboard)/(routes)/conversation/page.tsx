@@ -15,6 +15,7 @@ import { formSchema } from "./constants"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Empty } from "@/components/empty"
 
 const ConversatioPage = () => {
 
@@ -94,9 +95,9 @@ const ConversatioPage = () => {
                 </div>
                 <div className="space-y-4 mt-4">
                     {messages.length === 0 && !isLoading && (
-                        <div>
-                            empty!
-                        </div>
+                        <Empty 
+                            label="No conversation started."
+                        />
                     )}
                     <div className="flex flex-col-reverse gap-y-4">
                         {messages.map((message) => (
