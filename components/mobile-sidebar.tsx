@@ -14,7 +14,7 @@ const MobileSidebar = () => {
         setIsMounted(true)
     }, [])
 
-    if(isMounted){
+    if(!isMounted){
         return null
     }
 
