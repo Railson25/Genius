@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 import { useState } from "react"
 import * as z from "zod"
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -9,12 +10,13 @@ import axios from 'axios'
 
 import Heading from "@/components/heading"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { ImageIcon } from "lucide-react"
+import { Download, ImageIcon } from "lucide-react"
 
 import { amountOptions, formSchema, resolutionOptions } from "./constants"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Card, CardFooter } from "@/components/ui/card"
 import { Empty } from "@/components/empty"
 import { Loader } from "@/components/loader"
 import { cn } from "@/lib/utils"
@@ -165,8 +167,34 @@ const ImagePage = () => {
                             label="No images generated."
                         />
                     )}
-                   <div>
-                    Images
+                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+                        {images.map((src) => (
+                            <Card
+                                key={src}
+                                className="rounded-lg overflow-hidden"
+                            >
+                                <div className="relative aspect-square">
+                                    <Image 
+                                        alt="Image"
+                                        fill
+                                        src={src}
+                                    />
+                                </div>
+                                <CardFooter className="p-2">
+                                    <Button 
+                                        onClick={() => window.open(src)}
+                                        variant='secondary' 
+                                        className="w-full"
+                                    
+                                    >
+                                        <Download 
+                                            className="h-4 w-4 mr-2"
+                                        />
+                                        Download
+                                    </Button>
+                                </CardFooter>
+                            </Card>
+                        ))}
                    </div>
                 </div>
             </div>
