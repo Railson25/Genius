@@ -19,11 +19,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardFooter } from "@/components/ui/card"
 import { Empty } from "@/components/empty"
 import { Loader } from "@/components/loader"
-import { cn } from "@/lib/utils"
+import { useProModaL } from "@/hooks/use-pro-modal"
+
 
 
 const ImagePage = () => {
 
+    const proModal = useProModaL()
     const router = useRouter()
     const [images, setImages] = useState<string[]>([])
 
@@ -50,7 +52,9 @@ const ImagePage = () => {
             form.reset()
 
         } catch (error: any) {
-            console.log(error)
+            if(error?.response?.status === 403) {
+                proModal.onOpen()
+            }
         }finally{
             router.refresh()
         }
