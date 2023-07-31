@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { toast } from "react-hot-toast"
 import * as z from "zod"
 import {zodResolver} from '@hookform/resolvers/zod'
 import axios from 'axios'
@@ -56,6 +57,8 @@ const ConversatioPage = () => {
             
             if(error?.response?.status === 403) {
                 proModal.onOpen()
+            }else {
+                toast.error("Something went wrong")
             }
 
         }finally{
