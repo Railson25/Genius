@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import {tools} from '@/constants'
  
 
-export default function dashboardPage() {
+export default function DashboardPage() {
   const router = useRouter()
   return (
     <div>
